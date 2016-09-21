@@ -3,8 +3,8 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 
 public class Transition : MonoBehaviour {
-
-	public GameObject player;
+    public TextAsset dialogBeforeFight;
+    public string nextScene = "BATTLE1";
 	// Use this for initialization
 	void Start () {
 	
@@ -15,9 +15,14 @@ public class Transition : MonoBehaviour {
 	
 	}
 
-	void OnTriggerEnter(Collider other){
-		if(other.gameObject == player){
-			SceneManager.LoadScene ("Battle1");
+	void OnCollisionEnter2D(Collision2D other){
+        Debug.Log("collision");
+		if(other.gameObject.tag == "Player"){
+            Debug.Log("Collision with player");
+            other.gameObject.SendMessage("openDialogBox", dialogBeforeFight);
+            other.gameObject.SendMessage("setLoadSceneOnEnd", true);
+            other.gameObject.SendMessage("lockMovement");
+            other.gameObject.SendMessage("setScene", nextScene);
 		}
 	}
 }

@@ -2,17 +2,38 @@
 using System.Collections;
 
 public class PlayerMovement : MonoBehaviour {
-
-	public float speed = 3;
+    public bool mobile = false;
+    public float speed = 100;
+    private bool locked;
 	// Use this for initialization
 	void Start () {
-	
+        locked = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		float horizontal = Input.GetAxis ("Horizontal") * speed;
-		float vertical = Input.GetAxis ("Vertical") * speed;
-		transform.Translate (horizontal, vertical, 0);
+        if (!locked)
+        {
+            if (!mobile)
+            {
+                float horizontal = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
+                float vertical = Input.GetAxis("Vertical") * speed * Time.deltaTime;
+                transform.Translate(horizontal, vertical, 0);
+            }
+            else
+            {
+                float horizontal = Input.GetAccelerationEvent(0).acceleration.x * speed * Time.deltaTime;
+                float vertical = Input.GetAccelerationEvent(0).acceleration.y * speed * Time.deltaTime;
+                transform.Translate(horizontal, vertical, 0);
+            }
+        }
 	}
+    public void lockMovement()
+    {
+        locked = true;
+    }
+    public void unlockMovement()
+    {
+        locked = false;
+    }
 }
