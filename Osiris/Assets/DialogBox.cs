@@ -21,8 +21,8 @@ public class DialogBox : MonoBehaviour {
         dialogText = GameObject.Find("DialogText").GetComponent<Text>();
         dialogLocked = false;
         loadSceneOnEnd = false;
-        
-      
+
+        dialogIncrement();
         
     }
 	
@@ -67,7 +67,7 @@ public class DialogBox : MonoBehaviour {
     }
     private void dialogIncrement()
     {
-        if(Input.GetKeyDown(KeyCode.Return) && !dialogLocked){
+        if (((Input.GetKeyDown(KeyCode.Return))) && !dialogLocked){
             currentLine++;
         }
     }

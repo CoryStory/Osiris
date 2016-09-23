@@ -22,9 +22,16 @@ public class PlayerMovement : MonoBehaviour {
             }
             else
             {
-                float horizontal = Input.GetAccelerationEvent(0).acceleration.x * speed * Time.deltaTime;
-                float vertical = Input.GetAccelerationEvent(0).acceleration.y * speed * Time.deltaTime;
-                transform.Translate(horizontal, vertical, 0);
+                if (Input.GetTouch(0).phase == TouchPhase.Ended)
+                {
+                    Vector3 goTo = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
+
+                    while(Vector3.Distance(this.gameObject.transform.position, goTo) > 0f)
+                    {
+                        this.gameObject.transform.position = Vector3.Lerp(this.gameObject.transform.position, goTo, Time.deltaTime);
+                    } 
+                   
+                }
             }
         }
 	}
