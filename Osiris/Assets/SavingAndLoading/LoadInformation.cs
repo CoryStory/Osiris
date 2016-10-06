@@ -3,13 +3,14 @@ using System.Collections;
 
 public class LoadInformation : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+	public static void LoadAllInformation()
+    {
+        PlayerInfo.PlayerName = PlayerPrefs.GetString("PLAYERNAME");
+        PlayerInfo.PlayerLevel = PlayerPrefs.GetInt("PLAYERLEVEL");
+        PlayerInfo.PlayerStrength = PlayerPrefs.GetInt("PLAYERSTRENGTH");
+        PlayerInfo.PlayerSpeed = PlayerPrefs.GetInt("PLAYERSPEED");
+        PlayerInfo.PlayerWillpower = PlayerPrefs.GetInt("PLAYERWILLPOWER");
+        PlayerInfo.PlayerIntellect = PlayerPrefs.GetInt("PLAYERINTELLECT");
+        PlayerInfo.PlayerProgress = PlayerPrefs.GetFloat("PLAYERPROGRESS");
+    }
 }
